@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>revvr | honest bike guides for india</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F8F7F3;
+  --white: #FFFFFF;
+  --tag: #EDECE8;
+  --text: #111111;
+  --t2: #555555;
+  --t3: #999999;
+  --acc: #E84500;
+  --acc-bg: #FFF1EB;
+  --bdr: #E3E1DC;
+  --bdr2: #C9C7C0;
+  --fh: 'Space Grotesk', sans-serif;
+  --fb: 'Inter', sans-serif;
+  --mw: 1080px;
+  --r: 8px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--fb); background: var(--bg); color: var(--text); line-height: 1.6; font-size: 15px; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+
+.w { max-width: var(--mw); margin: 0 auto; padding: 0 24px; }
+
+/* HEADER */
+.hdr { position: sticky; top: 0; z-index: 99; background: rgba(248,247,243,0.94); backdrop-filter: blur(14px); border-bottom: 1px solid var(--bdr); }
+.hdr-in { display: flex; align-items: center; justify-content: space-between; height: 54px; }
+.logo { font-family: var(--fh); font-size: 20px; font-weight: 700; letter-spacing: -.5px; }
+.logo em { font-style: normal; color: var(--acc); }
+.nav { display: flex; gap: 2px; }
+.nav a { font-size: 13px; font-weight: 500; color: var(--t2); padding: 5px 10px; border-radius: 4px; transition: all .12s; }
+.nav a:hover { color: var(--text); background: var(--tag); }
+.nav-cta { background: var(--acc) !important; color: #fff !important; border-radius: 4px !important; }
+.nav-cta:hover { background: #c93b00 !important; }
+
+/* HERO */
+.hero { padding: 60px 0 0; border-bottom: 1px solid var(--bdr); }
+.hero-ey { font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--acc); margin-bottom: 14px; }
+.hero-h1 { font-family: var(--fh); font-size: clamp(52px, 9vw, 88px); font-weight: 700; line-height: .93; letter-spacing: -3px; margin-bottom: 18px; }
+.hero-sub { font-size: 16px; color: var(--t2); max-width: 500px; line-height: 1.55; margin-bottom: 28px; }
+.hero-stats { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 36px; }
+.hs { font-size: 13px; color: var(--t2); display: flex; align-items: center; gap: 6px; }
+.hs b { color: var(--text); font-weight: 600; }
+
+/* SPOTLIGHT TRIO */
+.spot-trio { display: grid; grid-template-columns: 1.5fr 1fr; gap: 16px; margin-bottom: 0; padding-bottom: 48px; }
+.spot-main { background: var(--white); border: 1px solid var(--bdr); border-radius: var(--r); overflow: hidden; display: flex; flex-direction: column; cursor: pointer; transition: box-shadow .15s; }
+.spot-main:hover { box-shadow: 0 4px 20px rgba(0,0,0,.07); }
+.spot-img { background: linear-gradient(135deg, #0D1117 0%, #1C0A00 55%, #2D1200 100%); display: flex; align-items: center; justify-content: center; height: 170px; font-size: 72px; }
+.spot-body { padding: 22px 24px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.spot-cat { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--acc); background: var(--acc-bg); padding: 3px 9px; border-radius: 100px; width: fit-content; }
+.spot-title { font-family: var(--fh); font-size: 17px; font-weight: 700; line-height: 1.25; letter-spacing: -.2px; }
+.spot-desc { font-size: 13px; color: var(--t2); line-height: 1.6; }
+.spot-cta { font-size: 12px; font-weight: 700; color: var(--acc); margin-top: auto; padding-top: 8px; }
+
+.spot-side { display: flex; flex-direction: column; gap: 12px; }
+.spot-sm { background: var(--white); border: 1px solid var(--bdr); border-radius: var(--r); padding: 18px 20px; cursor: pointer; transition: box-shadow .15s; display: flex; flex-direction: column; gap: 7px; flex: 1; }
+.spot-sm:hover { box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+.spot-sm .spot-cat { font-size: 10px; }
+.spot-sm .spot-title { font-size: 14px; }
+.spot-sm .spot-desc { font-size: 12px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.spot-sm .spot-cta { font-size: 11px; }
+
+/* FILTER TABS */
+.ftabs-top { display: flex; gap: 6px; flex-wrap: wrap; padding: 24px 0; border-bottom: 1px solid var(--bdr); }
+.ft { font-size: 13px; font-weight: 500; color: var(--t2); padding: 6px 14px; border: 1px solid var(--bdr); border-radius: 100px; background: transparent; cursor: pointer; transition: all .12s; font-family: var(--fb); }
+.ft:hover { border-color: var(--bdr2); color: var(--text); }
+.ft.on { background: var(--text); border-color: var(--text); color: #fff; }
+
+/* LATEST DROPS */
+.drops { display: flex; flex-direction: column; }
+.drop { display: grid; grid-template-columns: 96px 1fr; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--bdr); cursor: pointer; }
+.drop:last-child { border-bottom: none; }
+.drop:hover .dt { color: var(--acc); }
+.dm { display: flex; flex-direction: column; gap: 4px; padding-top: 2px; }
+.dcat { font-size: 11px; font-weight: 700; color: var(--acc); text-transform: uppercase; letter-spacing: .06em; }
+.ddate { font-size: 11px; color: var(--t3); }
+.dt { font-family: var(--fh); font-size: 15px; font-weight: 600; line-height: 1.3; letter-spacing: -.2px; margin-bottom: 5px; transition: color .12s; }
+.dd { font-size: 13px; color: var(--t2); line-height: 1.5; }
+
+/* SECTION HEADER */
+.sec-hd { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
+.sec-hd h2 { font-family: var(--fh); font-size: 22px; font-weight: 700; letter-spacing: -.4px; }
+.badge { font-size: 12px; font-weight: 600; color: var(--t3); background: var(--tag); padding: 2px 8px; border-radius: 100px; }
+
+/* CATEGORY SECTIONS */
+.cat-sec { padding: 48px 0; border-top: 1px solid var(--bdr); }
+.cat-hdr { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+.cat-ico { width: 48px; height: 48px; background: var(--acc-bg); border-radius: var(--r); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.cat-info { flex: 1; }
+.cat-name { font-family: var(--fh); font-size: 24px; font-weight: 700; letter-spacing: -.5px; line-height: 1; }
+.cat-sub { font-size: 13px; color: var(--t2); margin-top: 2px; }
+.cat-more { font-size: 13px; font-weight: 600; color: var(--acc); white-space: nowrap; }
+.cat-more:hover { text-decoration: underline; }
+.cat-list { display: flex; flex-direction: column; }
+.ca { padding: 14px 0; border-bottom: 1px solid var(--bdr); cursor: pointer; }
+.ca:last-child { border-bottom: none; }
+.ca:hover .ca-title { color: var(--acc); }
+.ca-title { font-family: var(--fh); font-size: 15px; font-weight: 600; line-height: 1.35; margin-bottom: 4px; transition: color .12s; }
+.ca-desc { font-size: 13px; color: var(--t2); line-height: 1.5; }
+
+/* BUDGET CTA */
+.budget { background: #0F0F0F; border-radius: var(--r); padding: 44px; margin: 0 0 0; }
+.budget h2 { font-family: var(--fh); font-size: 28px; font-weight: 700; letter-spacing: -.5px; color: #fff; margin-bottom: 6px; line-height: 1.1; }
+.budget-sub { font-family: var(--fh); font-size: 17px; font-weight: 600; color: #bbb; margin-bottom: 10px; letter-spacing: -.3px; }
+.budget p { font-size: 14px; color: #777; max-width: 420px; line-height: 1.6; margin-bottom: 20px; }
+.erow { display: flex; gap: 8px; max-width: 400px; }
+.ei { flex: 1; padding: 10px 14px; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 4px; color: #fff; font-size: 13px; font-family: var(--fb); outline: none; transition: border-color .12s; }
+.ei::placeholder { color: #555; }
+.ei:focus { border-color: var(--acc); }
+.es { padding: 10px 18px; background: var(--acc); color: #fff; border: none; border-radius: 4px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: var(--fb); white-space: nowrap; transition: background .12s; }
+.es:hover { background: #c93b00; }
+.budget-note { font-size: 11px; color: #555; margin-top: 8px; }
+
+/* ALL GUIDES */
+.ag-hd { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 0; }
+.ag-title { font-family: var(--fh); font-size: 20px; font-weight: 700; letter-spacing: -.4px; }
+.sw { position: relative; }
+.si { padding: 7px 12px 7px 32px; border: 1px solid var(--bdr); border-radius: 4px; background: var(--white); font-size: 13px; font-family: var(--fb); color: var(--text); outline: none; width: 190px; transition: border-color .12s, width .18s; }
+.si:focus { border-color: var(--acc); width: 230px; }
+.sic { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); color: var(--t3); font-size: 14px; pointer-events: none; }
+.ftabs-ag { display: flex; gap: 6px; flex-wrap: wrap; padding: 16px 0 20px; }
+.glist { display: flex; flex-direction: column; }
+.gr { display: flex; align-items: center; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--bdr); cursor: pointer; }
+.gr:last-child { border-bottom: none; }
+.gr:hover .gr-title { color: var(--acc); }
+.gr-title { flex: 1; font-size: 14px; font-weight: 500; line-height: 1.4; transition: color .12s; }
+.gr-tag { font-size: 11px; font-weight: 600; color: var(--t3); background: var(--tag); padding: 3px 8px; border-radius: 100px; text-transform: uppercase; letter-spacing: .03em; white-space: nowrap; }
+.empty { text-align: center; padding: 48px 24px; color: var(--t2); display: none; }
+.empty-ic { font-size: 32px; margin-bottom: 10px; }
+
+/* FOOTER */
+footer { border-top: 1px solid var(--bdr); padding: 48px 0 32px; margin-top: 64px; }
+.ft-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 36px; }
+.ft-desc { font-size: 13px; color: var(--t2); line-height: 1.6; margin-top: 10px; }
+.ft-col h4 { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--t3); margin-bottom: 14px; }
+.ft-links { display: flex; flex-direction: column; gap: 9px; }
+.ft-links a { font-size: 13px; color: var(--t2); transition: color .1s; }
+.ft-links a:hover { color: var(--acc); }
+.ft-bot { display: flex; align-items: center; justify-content: space-between; padding-top: 24px; border-top: 1px solid var(--bdr); gap: 16px; flex-wrap: wrap; }
+.ft-copy { font-size: 12px; color: var(--t3); }
+.ft-legal { font-size: 12px; color: var(--t3); text-align: right; max-width: 420px; }
+
+/* DIVIDER */
+.hr { border: none; border-top: 1px solid var(--bdr); margin: 0; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .spot-trio { grid-template-columns: 1fr; }
+  .spot-side { flex-direction: row; }
+  .nav a:not(.nav-cta) { display: none; }
+  .hero-h1 { letter-spacing: -1.5px; }
+  .drop { grid-template-columns: 72px 1fr; }
+  .budget { padding: 28px 20px; }
+  .ft-grid { grid-template-columns: 1fr; gap: 28px; }
+}
+@media (max-width: 480px) {
+  .spot-side { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="w">
+    <div class="hdr-in">
+      <a href="#" class="logo">revv<em>r</em></a>
+      <nav class="nav">
+        <a href="#commuter">commuter</a>
+        <a href="#sports">sports</a>
+        <a href="#adventure">adventure</a>
+        <a href="#cruiser">cruiser</a>
+        <a href="#scooter">scooter</a>
+        <a href="#electric">electric</a>
+        <a href="#all" class="nav-cta">all guides</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="w">
+    <p class="hero-ey">🏍️ made for india's roads</p>
+    <h1 class="hero-h1">revvr</h1>
+    <p class="hero-sub">india's most honest bike guide. real reviews, real prices, zero bullshit. we've ridden so you don't regret.</p>
+    <div class="hero-stats">
+      <span class="hs">🏍️ <b>62 commuter guides</b></span>
+      <span class="hs">⚡ <b>24 electric guides</b></span>
+      <span class="hs">📋 <b>218 total guides</b></span>
+    </div>
+
+    <!-- SPOTLIGHT TRIO: 1 big + 2 small -->
+    <div class="spot-trio">
+      <div class="spot-main">
+        <div class="spot-img">🏔️</div>
+        <div class="spot-body">
+          <span class="spot-cat">🏔️ adventure</span>
+          <div class="spot-title">Royal Enfield Himalayan 450 complete guide (2026) — is the upgrade actually worth it?</div>
+          <p class="spot-desc">New 450cc platform, Tripper nav, better suspension. We rode it Manali to Leh. Every variant broken down — Sherpa vs Sleet vs Summit — with clear recommendations for each type of rider. No RE fanboy bias.</p>
+          <span class="spot-cta">read guide →</span>
+        </div>
+      </div>
+      <div class="spot-side">
+        <div class="spot-sm">
+          <span class="spot-cat">🏁 sports</span>
+          <div class="spot-title">KTM Duke 390 Gen 3 review (2026) — the naked beast just got even better</div>
+          <p class="spot-desc">New electronics, updated TFT, sharper riding modes. Is the Gen 3 the best performance bike under Rs 3.5L? We think yes — here's why, and who might still prefer the RC.</p>
+          <span class="spot-cta">read guide →</span>
+        </div>
+        <div class="spot-sm">
+          <span class="spot-cat">⚡ electric</span>
+          <div class="spot-title">Ola vs Ather vs TVS iQube (2026) — India's electric scooter shootout, honestly done</div>
+          <p class="spot-desc">Three different philosophies. One is fast and flashy, one is premium and polished, one is reliable and everywhere. Which one is actually right for you in 2026?</p>
+          <span class="spot-cta">read guide →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOP FILTER TABS -->
+    <div class="ftabs-top">
+      <button class="ft on" data-top="all">all</button>
+      <button class="ft" data-top="commuter">🏍️ commuter</button>
+      <button class="ft" data-top="sports">🏁 sports</button>
+      <button class="ft" data-top="adventure">🏔️ adventure</button>
+      <button class="ft" data-top="cruiser">🤠 cruiser</button>
+      <button class="ft" data-top="scooter">🛵 scooter</button>
+      <button class="ft" data-top="electric">⚡ electric</button>
+      <button class="ft" data-top="price-guide">💰 price guide</button>
+      <button class="ft" data-top="guide">📋 guide</button>
+    </div>
+  </div>
+</section>
+
+<!-- LATEST DROPS -->
+<section style="padding: 40px 0 48px;">
+  <div class="w">
+    <div class="sec-hd"><h2>🔥 latest drops</h2></div>
+    <div class="drops">
+      <div class="drop"><div class="dm"><span class="dcat">🛵 scooter</span><span class="ddate">10 Jun 2026</span></div><div><div class="dt">best scooters in India (2026) — 7 picks every daily rider should know about</div><div class="dd">Ranked by real-world usability, service network, and honest value. Honda Activa vs TVS Jupiter vs Suzuki Access — we finally settle it for good.</div></div></div>
+      <div class="drop"><div class="dm"><span class="dcat">⚡ electric</span><span class="ddate">08 Jun 2026</span></div><div><div class="dt">Ola S1 Pro vs Ather 450X (2026) — two years later, who actually won?</div><div class="dd">Both have had time to mature. Updated software, newer hardware, better service. Which one would we actually buy today? Honest answer inside.</div></div></div>
+      <div class="drop"><div class="dm"><span class="dcat">🏍️ commuter</span><span class="ddate">06 Jun 2026</span></div><div><div class="dt">5 commuter bikes you have to try in 2026 if you haven't already</div><div class="dd">From the TVS Raider 125 to the Honda SP 125 — picks worth knowing about in 2026, with honest prices and who each one is actually for.</div></div></div>
+      <div class="drop"><div class="dm"><span class="dcat">🏁 sports</span><span class="ddate">04 Jun 2026</span></div><div><div class="dt">Bajaj Pulsar N160 vs TVS Apache RTR 160 4V (2026) — India's 160cc battle</div><div class="dd">Both updated, both popular, same price bracket. One clear winner for most people. We tell you which and why, without the marketing fluff.</div></div></div>
+      <div class="drop"><div class="dm"><span class="dcat">💰 price guide</span><span class="ddate">03 Jun 2026</span></div><div><div class="dt">Royal Enfield Hunter 350 price in India (2026) — complete on-road price by city</div><div class="dd">Ex-showroom, RTO, insurance, and on-road prices for Hunter 350 Dapper, Dapper S, and Rebel across Delhi, Mumbai, Bangalore, Chennai, Hyderabad.</div></div></div>
+      <div class="drop"><div class="dm"><span class="dcat">🤠 cruiser</span><span class="ddate">01 Jun 2026</span></div><div><div class="dt">Bajaj Avenger 220 Street review (2026) — south India's cruiser king, honestly</div><div class="dd">Low slung, relaxed, made for long highway stretches. For the right person it's still unbeatable in its price range. Find out if you're that person.</div></div></div>
+      <div class="drop"><div class="dm"><span class="dcat">🏔️ adventure</span><span class="ddate">29 May 2026</span></div><div><div class="dt">Hero Xpulse 200 4V review (2026) — India's best budget ADV? Actually yes.</div><div class="dd">At Rs 1.5 lakh, there is nothing else. But is the budget the only reason to buy it? Honest review after riding through NH-58, city traffic, and trail work.</div></div></div>
+      <div class="drop"><div class="dm"><span class="dcat">🏍️ commuter</span><span class="ddate">27 May 2026</span></div><div><div class="dt">Hero Splendor Plus review (2026) — India's best-selling bike, but why exactly?</div><div class="dd">30 lakh Indians buy it every year. The Splendor isn't exciting — it solves a specific problem better than anything else. Here's what that problem is.</div></div></div>
+      <div class="drop"><div class="dm"><span class="dcat">🤠 cruiser</span><span class="ddate">25 May 2026</span></div><div><div class="dt">Royal Enfield Classic 350 vs Meteor 350 (2026) — which RE is actually for you?</div><div class="dd">Both are RE. Both are around Rs 2 lakh. But very different bikes. We break down who should pick which, with zero brand fanboy bias.</div></div></div>
+      <div class="drop"><div class="dm"><span class="dcat">⚡ electric</span><span class="ddate">22 May 2026</span></div><div><div class="dt">TVS iQube ST review (2026) — the reliable choice everyone sleeps on</div><div class="dd">No viral ads. No software drama. Just a very well-sorted electric scooter with the best service network in the segment. Is boring actually the right answer?</div></div></div>
+      <div class="drop"><div class="dm"><span class="dcat">🏔️ adventure</span><span class="ddate">20 May 2026</span></div><div><div class="dt">KTM Adventure 390 vs Royal Enfield Himalayan 450 (2026) — the ADV verdict</div><div class="dd">Rs 50,000 price gap. Completely different riding characters. One is a proper enduro machine, one is a loaded tourer. Which one is right for you?</div></div></div>
+      <div class="drop"><div class="dm"><span class="dcat">💰 price guide</span><span class="ddate">18 May 2026</span></div><div><div class="dt">Yamaha R15 V4 price in India (2026) — ex-showroom and on-road prices by state</div><div class="dd">Complete Yamaha R15 V4 price list. Standard vs Racing Blue, state-wise ex-showroom prices in Maharashtra, Karnataka, Tamil Nadu, Delhi, and more.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<!-- CATEGORY: COMMUTER -->
+<section class="cat-sec" id="commuter">
+  <div class="w">
+    <div class="cat-hdr">
+      <div class="cat-ico">🏍️</div>
+      <div class="cat-info"><div class="cat-name">commuter</div><div class="cat-sub">daily rides, fuel economy, no-nonsense picks</div></div>
+      <span class="badge">62</span>
+      <a href="#" class="cat-more">+ 56 more commuter guides →</a>
+    </div>
+    <div class="cat-list">
+      <div class="ca"><div class="ca-title">Hero Splendor Plus review (2026) — India's best-selling bike, honestly reviewed</div><div class="ca-desc">30 lakh Indians buy it every year. We break down why — the mileage, the service network, the resale value — and who should actually NOT buy it.</div></div>
+      <div class="ca"><div class="ca-title">Bajaj CT100 vs Hero HF Deluxe (2026) — the true budget battle</div><div class="ca-desc">Under Rs 65,000. Both are fine. But one is clearly better for most buyers. Honest comparison for the budget most of India actually rides on.</div></div>
+      <div class="ca"><div class="ca-title">Honda SP 125 review (2026) — the most refined 125cc commuter in India?</div><div class="ca-desc">PGM-FI engine, OBD2 compliance, and a noticeably premium feel. But is it worth Rs 20,000 more than the Splendor? We answer this properly.</div></div>
+      <div class="ca"><div class="ca-title">TVS Raider 125 review (2026) — the fun commuter that punches way above its weight</div><div class="ca-desc">Style, a sporty ride feel, and decent mileage. The Raider 125 is one of the most interesting 125cc bikes in India right now — here's the honest verdict.</div></div>
+      <div class="ca"><div class="ca-title">best commuter bikes under 1 lakh in India (2026) — honest picks, no BS</div><div class="ca-desc">Under Rs 1 lakh, the choice is massive and confusing. We rank 8 bikes across mileage, service network, ride comfort, and long-term cost of ownership.</div></div>
+      <div class="ca"><div class="ca-title">Bajaj Discover 125 vs Honda CB Shine (2026) — which 125cc is right for you?</div><div class="ca-desc">Two very different bikes at almost the same price. One is built for max mileage, one for a refined ride quality. The right choice depends entirely on your priorities.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORY: SPORTS -->
+<section class="cat-sec" id="sports">
+  <div class="w">
+    <div class="cat-hdr">
+      <div class="cat-ico">🏁</div>
+      <div class="cat-info"><div class="cat-name">sports</div><div class="cat-sub">performance bikes, track picks, the fast stuff</div></div>
+      <span class="badge">38</span>
+      <a href="#" class="cat-more">+ 32 more sports guides →</a>
+    </div>
+    <div class="cat-list">
+      <div class="ca"><div class="ca-title">Yamaha R15 V4 review (2026) — the best 155cc sportbike in India, still</div><div class="ca-desc">Slipper clutch, VVA, traction control at this price point. The R15 V4 is still the benchmark in its segment — here's why, and who shouldn't buy it anyway.</div></div>
+      <div class="ca"><div class="ca-title">KTM Duke 390 Gen 3 review (2026) — the naked beast just keeps getting better</div><div class="ca-desc">New electronics, updated TFT, better ergonomics. The Gen 3 Duke 390 is the most complete performance bike under Rs 3.5L. Honest breakdown inside.</div></div>
+      <div class="ca"><div class="ca-title">TVS Apache RTR 200 4V review (2026) — track DNA at a street price</div><div class="ca-desc">The Apache 200 4V is made for riders who want a performance bike but can't stomach the KTM price. Does it actually deliver? Mostly, yes.</div></div>
+      <div class="ca"><div class="ca-title">Bajaj Pulsar NS200 review (2026) — still the benchmark under Rs 1.5L?</div><div class="ca-desc">The NS200 has been around forever. Is it still the right buy in 2026? We compare it against newer competition and give you a straight, no-fluff answer.</div></div>
+      <div class="ca"><div class="ca-title">KTM RC 390 vs Yamaha R3 (2026) — India's sportbike showdown at Rs 3.5–4L</div><div class="ca-desc">Full fairing, track capability, same price bracket. RC 390 or R3? Two completely different personalities. We help you pick the right one for your riding style.</div></div>
+      <div class="ca"><div class="ca-title">best sports bikes under 2 lakh in India (2026) — performance without bankruptcy</div><div class="ca-desc">From Rs 1.2L to Rs 2L, India has some genuinely serious options. Ranked by performance, long-term reliability, and actual track credentials — not spec sheets.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BUDGET CTA -->
+<div style="padding: 0 0 48px;">
+  <div class="w">
+    <div class="budget">
+      <div style="font-size:36px; margin-bottom:12px;">🏍️</div>
+      <h2>free cheat sheet</h2>
+      <p class="budget-sub">what to buy at every budget in india</p>
+      <p>we made a guide: best bike at Rs 60K / 80K / 1L / 1.5L / 2L / 3L+ — across commuter, sports, adventure, scooter, and electric. updated prices by city. completely free, one email.</p>
+      <div class="erow">
+        <input class="ei" type="email" placeholder="your@email.com">
+        <button class="es">send me the guide</button>
+      </div>
+      <p class="budget-note">join 0 readers. we just launched. be first.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORY: ADVENTURE -->
+<section class="cat-sec" id="adventure">
+  <div class="w">
+    <div class="cat-hdr">
+      <div class="cat-ico">🏔️</div>
+      <div class="cat-info"><div class="cat-name">adventure</div><div class="cat-sub">ADV bikes, trail picks, himalayan tours</div></div>
+      <span class="badge">22</span>
+      <a href="#" class="cat-more">+ 16 more adventure guides →</a>
+    </div>
+    <div class="cat-list">
+      <div class="ca"><div class="ca-title">Royal Enfield Himalayan 450 review (2026) — India's best ADV got a serious upgrade</div><div class="ca-desc">Tripper navigation, new 450cc single, more suspension travel. We rode it Manali to Leh. Here's what we actually think — no RE fanboy bias anywhere.</div></div>
+      <div class="ca"><div class="ca-title">Hero Xpulse 200 4V review (2026) — India's best budget adventure bike? Genuinely, yes.</div><div class="ca-desc">At Rs 1.5L, there is simply nothing else. Honest review of long-term ownership after 10,000km across highways, city traffic, and light trail riding.</div></div>
+      <div class="ca"><div class="ca-title">KTM Adventure 390 vs Royal Enfield Himalayan 450 (2026) — the ADV battle</div><div class="ca-desc">Rs 50,000 price gap. Completely different riding characters. One is a proper enduro machine, one is a loaded touring ADV. Which one is right for you?</div></div>
+      <div class="ca"><div class="ca-title">Suzuki V-Strom SX 250 review (2026) — the ADV nobody is talking about</div><div class="ca-desc">Suzuki quietly launched the best-sorted 250cc ADV in India and the internet ignored it. Honest review — where it wins, where it doesn't, who it's actually for.</div></div>
+      <div class="ca"><div class="ca-title">best adventure bikes under 2.5 lakh in India (2026) — trail-ready honest picks</div><div class="ca-desc">From Rs 1.5L to Rs 2.5L, what are your actual ADV options in India? We rank them by real off-road capability — not marketing imagery.</div></div>
+      <div class="ca"><div class="ca-title">Royal Enfield Scram 411 review (2026) — the scrambler India actually needed?</div><div class="ca-desc">The Scram 411 is the Himalayan with road tires and a lower seat. It's a very specific bike for a very specific rider. We explain exactly who that person is.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORY: CRUISER -->
+<section class="cat-sec" id="cruiser">
+  <div class="w">
+    <div class="cat-hdr">
+      <div class="cat-ico">🤠</div>
+      <div class="cat-info"><div class="cat-name">cruiser</div><div class="cat-sub">relaxed riding, highway mile-eaters, classic vibes</div></div>
+      <span class="badge">28</span>
+      <a href="#" class="cat-more">+ 22 more cruiser guides →</a>
+    </div>
+    <div class="cat-list">
+      <div class="ca"><div class="ca-title">Royal Enfield Classic 350 review (2026) — the icon that refuses to modernize</div><div class="ca-desc">No TFT. No ride modes. No modern frills. Just a thumper and vibes. Here's why that's enough for a lot of people — and the situations when it genuinely isn't.</div></div>
+      <div class="ca"><div class="ca-title">Royal Enfield Meteor 350 vs Classic 350 (2026) — which RE is actually for you?</div><div class="ca-desc">Both are around Rs 2 lakh. Both are RE. But they are completely different riding experiences. We answer the "which one should I get?" question directly.</div></div>
+      <div class="ca"><div class="ca-title">Bajaj Avenger 220 Street review (2026) — south India's cruiser king, honestly reviewed</div><div class="ca-desc">Low slung, relaxed, and genuinely made for long highway stretches. For the right person, it's still unbeatable in its price range. Find out if you're that person.</div></div>
+      <div class="ca"><div class="ca-title">Jawa 42 Bobber review (2026) — retro looks, modern everything else</div><div class="ca-desc">The 42 Bobber has updated mechanicals but the same gorgeous stance. Style buy or legit motorcycle? Honest answer after 3,000km across Rajasthan highways.</div></div>
+      <div class="ca"><div class="ca-title">Honda H'ness CB350 review (2026) — Japan's answer to Royal Enfield</div><div class="ca-desc">Honda made a retro thumper and it's objectively better-engineered than the RE Classic. But does it have the soul? We compare them side by side, honestly.</div></div>
+      <div class="ca"><div class="ca-title">Royal Enfield Super Meteor 650 review (2026) — India's first proper 650cc cruiser</div><div class="ca-desc">At Rs 3.6L, it competes globally. Is the 650cc parallel twin the best motorcycle RE has ever made? We rode 4,000km to find out — and yes, probably.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORY: SCOOTER -->
+<section class="cat-sec" id="scooter">
+  <div class="w">
+    <div class="cat-hdr">
+      <div class="cat-ico">🛵</div>
+      <div class="cat-info"><div class="cat-name">scooter</div><div class="cat-sub">city commute, convenience, storage, and real comfort</div></div>
+      <span class="badge">34</span>
+      <a href="#" class="cat-more">+ 28 more scooter guides →</a>
+    </div>
+    <div class="cat-list">
+      <div class="ca"><div class="ca-title">Honda Activa 6G review (2026) — India's best-selling vehicle, honestly reviewed</div><div class="ca-desc">India buys 3 million Activas a year. It's the safe, reliable choice. We break down exactly why that's the case — and when you should consider something else.</div></div>
+      <div class="ca"><div class="ca-title">TVS Jupiter 125 review (2026) — the comfortable family scooter done right</div><div class="ca-desc">The Jupiter 125 is for riders who prioritize comfort, under-seat storage, and a smooth ride above all else. More practical than the Activa 6G? We settle it.</div></div>
+      <div class="ca"><div class="ca-title">Suzuki Access 125 SE review (2026) — the scooter commuters keep coming back to</div><div class="ca-desc">The Access 125 has been around forever — because it's genuinely good. Ride quality that beats more expensive competition. Honest review of the 2026 SE.</div></div>
+      <div class="ca"><div class="ca-title">Yamaha Fascino 125 Fi review (2026) — the stylish choice that actually delivers</div><div class="ca-desc">Full LED, connected features, and a distinctive body at Rs 80K. The Fascino 125 is the scooter for people who care about how their ride looks — and it's worth it.</div></div>
+      <div class="ca"><div class="ca-title">best scooters under 80,000 in India (2026) — where the smart money goes</div><div class="ca-desc">Six honest picks under Rs 80,000. Ranked by real-world mileage, service costs, ride comfort, and the least annoying things to own long-term.</div></div>
+      <div class="ca"><div class="ca-title">Honda Dio 125 vs TVS Ntorq 125 (2026) — the youth scooter battle</div><div class="ca-desc">Two scooters aimed at the same demographic. One is smoother and refined, one is faster and more exciting. Which is worth your money under Rs 90K?</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORY: ELECTRIC -->
+<section class="cat-sec" id="electric">
+  <div class="w">
+    <div class="cat-hdr">
+      <div class="cat-ico">⚡</div>
+      <div class="cat-info"><div class="cat-name">electric</div><div class="cat-sub">EVs, real-world range, charging, India's electric shift</div></div>
+      <span class="badge">24</span>
+      <a href="#" class="cat-more">+ 18 more electric guides →</a>
+    </div>
+    <div class="cat-list">
+      <div class="ca"><div class="ca-title">Ola S1 Pro review (2026) — three years later, is it finally sorted?</div><div class="ca-desc">The S1 Pro had a messy launch. Software bugs, service chaos, delivery drama. In 2026, most of that is fixed. Is it now the best electric scooter in India? Almost.</div></div>
+      <div class="ca"><div class="ca-title">Ather 450X Gen 3 review (2026) — India's most premium electric scooter</div><div class="ca-desc">Better range, faster charging, same build quality that made Ather worth talking about. Honest verdict after six months of daily riding in Bangalore.</div></div>
+      <div class="ca"><div class="ca-title">TVS iQube ST review (2026) — the reliable choice nobody talks about enough</div><div class="ca-desc">No viral campaigns. No software drama. Just a well-sorted electric scooter with the best service network in the segment. Sometimes boring is the correct answer.</div></div>
+      <div class="ca"><div class="ca-title">Bajaj Chetak 35 Series review (2026) — retro looks, much better mechanicals</div><div class="ca-desc">108km real-world range, 63km/h top speed, much improved build. For short-commute buyers in tier-2 cities, it now makes genuine, practical sense.</div></div>
+      <div class="ca"><div class="ca-title">best electric scooters under 1.5 lakh in India (2026) — the segment finally delivers</div><div class="ca-desc">Ranked by actual range, charging time, service availability, and cost of ownership. The sub-Rs 1.5L electric scooter segment is finally worth buying into.</div></div>
+      <div class="ca"><div class="ca-title">Ola vs Ather vs TVS iQube (2026) — India's electric scooter shootout</div><div class="ca-desc">Three different philosophies. One is tech-forward and fast, one is premium and polished, one is reliable and everywhere. We tell you which to pick and why.</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<!-- ALL GUIDES -->
+<section style="padding: 48px 0 64px;" id="all">
+  <div class="w">
+    <div class="ag-hd">
+      <h2 class="ag-title">📚 every single guide (<span id="tc">0</span>)</h2>
+      <div class="sw">
+        <span class="sic">🔍</span>
+        <input class="si" id="srch" type="search" placeholder="search guides...">
+      </div>
+    </div>
+    <div class="ftabs-ag">
+      <button class="ft on" data-cat="all">all</button>
+      <button class="ft" data-cat="commuter">🏍️ commuter</button>
+      <button class="ft" data-cat="sports">🏁 sports</button>
+      <button class="ft" data-cat="adventure">🏔️ adventure</button>
+      <button class="ft" data-cat="cruiser">🤠 cruiser</button>
+      <button class="ft" data-cat="scooter">🛵 scooter</button>
+      <button class="ft" data-cat="electric">⚡ electric</button>
+      <button class="ft" data-cat="price-guide">💰 price guide</button>
+      <button class="ft" data-cat="guide">📋 guide</button>
+    </div>
+    <div class="glist" id="glist"></div>
+    <div class="empty" id="empty"><div class="empty-ic">🔧</div><p>nothing found. try a different search or category.</p></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="w">
+    <div class="ft-grid">
+      <div>
+        <div class="logo">revv<em>r</em></div>
+        <p class="ft-desc">honest bike reviews, prices &amp; guides for india. no sponsors, no affiliate links, no BS. we ride what we review.</p>
+      </div>
+      <div class="ft-col">
+        <h4>categories</h4>
+        <div class="ft-links">
+          <a href="#commuter">🏍️ commuter</a>
+          <a href="#sports">🏁 sports</a>
+          <a href="#adventure">🏔️ adventure</a>
+          <a href="#cruiser">🤠 cruiser</a>
+          <a href="#scooter">🛵 scooter</a>
+          <a href="#electric">⚡ electric</a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>site</h4>
+        <div class="ft-links">
+          <a href="#">about revvr</a>
+          <a href="#">privacy policy</a>
+          <a href="#">disclaimer</a>
+          <a href="#">contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <span class="ft-copy">© 2026 revvr.in — honest bikes, honest opinions.</span>
+      <span class="ft-legal">ride responsibly. all prices listed are approximate and vary by state, dealer, insurance, and date of purchase. always verify final on-road price with your local showroom before buying.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const guides = [
+  // COMMUTER
+  {t:"🏍️ Hero Splendor Plus review (2026) — India's best-selling bike, honestly reviewed",c:"commuter"},
+  {t:"🏍️ Bajaj CT100 vs Hero HF Deluxe (2026) — the true budget battle",c:"commuter"},
+  {t:"🏍️ Honda SP 125 review (2026) — the most refined 125cc commuter?",c:"commuter"},
+  {t:"🏍️ TVS Raider 125 review (2026) — the fun commuter that punches above its weight",c:"commuter"},
+  {t:"🏍️ best commuter bikes under 1 lakh in India (2026)",c:"commuter"},
+  {t:"🏍️ Bajaj Discover 125 vs Honda CB Shine (2026) — which 125cc is right for you?",c:"commuter"},
+  {t:"🏍️ Hero HF Deluxe review (2026) — India's entry-level king",c:"commuter"},
+  {t:"🏍️ Honda Shine 125 vs TVS Raider 125 (2026)",c:"commuter"},
+  {t:"🏍️ Hero Glamour 125 review (2026) — the mid-range commuter nobody talks about",c:"commuter"},
+  {t:"🏍️ best bikes for college students in India (2026)",c:"commuter"},
+  {t:"🏍️ Bajaj Platina 110 review (2026) — the mileage king of India",c:"commuter"},
+  {t:"🏍️ TVS Star City Plus review (2026) — reliable and deeply forgettable",c:"commuter"},
+  {t:"🏍️ Honda Activa vs Hero Splendor — scooter or bike for daily commute?",c:"commuter"},
+  {t:"🏍️ best 150cc bikes in India (2026) — the sweet spot for most riders",c:"commuter"},
+  {t:"🏍️ Hero Passion Pro review (2026) — the forgotten mid-range commuter",c:"commuter"},
+  {t:"🏍️ Bajaj CT110X review (2026) — the budget dual-sport nobody expected",c:"commuter"},
+  {t:"🏍️ Honda CB150 Livo review (2026) — commuter stepping up",c:"commuter"},
+  {t:"🏍️ TVS Radeon review (2026) — the value play from TVS",c:"commuter"},
+  // SPORTS
+  {t:"🏁 Yamaha R15 V4 review (2026) — still the best 155cc in India",c:"sports"},
+  {t:"🏁 KTM Duke 390 Gen 3 review (2026) — the naked beast evolved",c:"sports"},
+  {t:"🏁 TVS Apache RTR 200 4V review (2026) — track DNA at a street price",c:"sports"},
+  {t:"🏁 Bajaj Pulsar NS200 review (2026) — still the benchmark?",c:"sports"},
+  {t:"🏁 KTM RC 390 vs Yamaha R3 (2026) — India's sportbike showdown",c:"sports"},
+  {t:"🏁 best sports bikes under 2 lakh in India (2026)",c:"sports"},
+  {t:"🏁 Honda CB150R review (2026) — sleek but worth the premium?",c:"sports"},
+  {t:"🏁 Bajaj Pulsar N160 vs TVS Apache RTR 160 4V (2026)",c:"sports"},
+  {t:"🏁 Yamaha MT-15 review (2026) — the streetfighter under Rs 2L",c:"sports"},
+  {t:"🏁 KTM Duke 250 vs Duke 390 (2026) — is the upgrade worth Rs 60K?",c:"sports"},
+  {t:"🏁 best sports bikes for beginners in India (2026)",c:"sports"},
+  {t:"🏁 Honda Hornet 2.0 review (2026) — the underrated sports bike",c:"sports"},
+  {t:"🏁 Bajaj Dominar 400 review (2026) — sports tourer at a cruiser price",c:"sports"},
+  {t:"🏁 Royal Enfield Hunter 350 vs Yamaha MT-15 (2026)",c:"sports"},
+  {t:"🏁 TVS Apache RR 310 review (2026) — India's most serious track weapon",c:"sports"},
+  {t:"🏁 Bajaj Pulsar RS200 review (2026) — the faired Pulsar, still relevant?",c:"sports"},
+  {t:"🏁 Yamaha FZ-X review (2026) — the scrambler crossover worth knowing about",c:"sports"},
+  // ADVENTURE
+  {t:"🏔️ Royal Enfield Himalayan 450 review (2026) — India's best ADV upgraded",c:"adventure"},
+  {t:"🏔️ Hero Xpulse 200 4V review (2026) — India's best budget ADV",c:"adventure"},
+  {t:"🏔️ KTM Adventure 390 vs RE Himalayan 450 (2026)",c:"adventure"},
+  {t:"🏔️ Suzuki V-Strom SX 250 review (2026) — the underrated ADV",c:"adventure"},
+  {t:"🏔️ best adventure bikes under 2.5 lakh in India (2026)",c:"adventure"},
+  {t:"🏔️ Royal Enfield Scram 411 review (2026) — the scrambler India needed?",c:"adventure"},
+  {t:"🏔️ Bajaj Dominar 400 vs KTM Adventure 390 (2026)",c:"adventure"},
+  {t:"🏔️ Hero Xpulse 200 4V vs Suzuki V-Strom SX (2026)",c:"adventure"},
+  {t:"🏔️ how to plan your first Manali-Leh bike trip (2026 guide)",c:"adventure"},
+  {t:"🏔️ essential gear for ADV riding in India (2026)",c:"adventure"},
+  {t:"🏔️ Yezdi Adventure review (2026) — the dark horse ADV",c:"adventure"},
+  {t:"🏔️ best tyres for adventure riding in India (2026)",c:"adventure"},
+  // CRUISER
+  {t:"🤠 Royal Enfield Classic 350 review (2026) — the icon that refuses to modernize",c:"cruiser"},
+  {t:"🤠 Royal Enfield Meteor 350 vs Classic 350 (2026) — which RE is for you?",c:"cruiser"},
+  {t:"🤠 Bajaj Avenger 220 Street review (2026) — south India's cruiser king",c:"cruiser"},
+  {t:"🤠 Jawa 42 Bobber review (2026) — retro looks, modern everything",c:"cruiser"},
+  {t:"🤠 Honda H'ness CB350 review (2026) — Japan's answer to Royal Enfield",c:"cruiser"},
+  {t:"🤠 Royal Enfield Super Meteor 650 review (2026)",c:"cruiser"},
+  {t:"🤠 Jawa Perak review (2026) — the bobber that started India's retro revival",c:"cruiser"},
+  {t:"🤠 Royal Enfield Bullet 350 review (2026) — the original thumper",c:"cruiser"},
+  {t:"🤠 Yezdi Roadster review (2026) — retro revival done right?",c:"cruiser"},
+  {t:"🤠 best cruiser bikes under 2.5 lakh in India (2026)",c:"cruiser"},
+  {t:"🤠 Royal Enfield 650 Twins vs Super Meteor 650 (2026)",c:"cruiser"},
+  {t:"🤠 Honda H'ness CB350 vs Royal Enfield Classic 350 (2026) — detailed comparison",c:"cruiser"},
+  {t:"🤠 Bajaj Avenger 160 vs Avenger 220 (2026) — which Avenger should you buy?",c:"cruiser"},
+  // SCOOTER
+  {t:"🛵 Honda Activa 6G review (2026) — India's best-selling vehicle, honestly",c:"scooter"},
+  {t:"🛵 TVS Jupiter 125 review (2026) — the comfortable family scooter",c:"scooter"},
+  {t:"🛵 Suzuki Access 125 SE review (2026) — the scooter commuters keep buying",c:"scooter"},
+  {t:"🛵 Yamaha Fascino 125 review (2026) — style that actually delivers",c:"scooter"},
+  {t:"🛵 best scooters under 80,000 in India (2026)",c:"scooter"},
+  {t:"🛵 Honda Dio 125 vs TVS Ntorq 125 (2026) — youth scooter battle",c:"scooter"},
+  {t:"🛵 Honda Activa 6G vs TVS Jupiter 125 (2026) — India's scooter showdown",c:"scooter"},
+  {t:"🛵 Suzuki Access vs Honda Activa (2026) — which should you actually buy?",c:"scooter"},
+  {t:"🛵 best scooters for women in India (2026)",c:"scooter"},
+  {t:"🛵 Yamaha RayZR 125 vs Honda Dio 125 (2026)",c:"scooter"},
+  {t:"🛵 TVS Ntorq 125 review (2026) — the sportiest 125cc scooter in India",c:"scooter"},
+  {t:"🛵 Honda Grazia review (2026) — the premium Activa alternative",c:"scooter"},
+  // ELECTRIC
+  {t:"⚡ Ola S1 Pro review (2026) — 3 years later, is it finally sorted?",c:"electric"},
+  {t:"⚡ Ather 450X Gen 3 review (2026) — India's most premium e-scooter",c:"electric"},
+  {t:"⚡ TVS iQube ST review (2026) — the reliable choice nobody talks about",c:"electric"},
+  {t:"⚡ Bajaj Chetak 35 Series review (2026) — retro looks, solid mechanicals",c:"electric"},
+  {t:"⚡ best electric scooters under 1.5 lakh in India (2026)",c:"electric"},
+  {t:"⚡ Ola vs Ather vs TVS iQube (2026) — electric scooter shootout",c:"electric"},
+  {t:"⚡ Simple One electric scooter review (2026) — the dark horse",c:"electric"},
+  {t:"⚡ Ather 450S vs Ola S1 Air (2026) — budget electric scooter battle",c:"electric"},
+  {t:"⚡ how to actually calculate EV cost savings in India (2026)",c:"electric"},
+  {t:"⚡ electric scooter buying guide for India (2026) — what nobody tells you",c:"electric"},
+  {t:"⚡ Ola Roadster review (2026) — India's first electric motorcycle, honestly",c:"electric"},
+  {t:"⚡ charging infrastructure for EVs in India by city (2026)",c:"electric"},
+  // PRICE GUIDE
+  {t:"💰 Royal Enfield Classic 350 price in India (2026) — complete price list by state",c:"price-guide"},
+  {t:"💰 KTM Duke 390 price in India (2026) — ex-showroom and on-road by city",c:"price-guide"},
+  {t:"💰 Honda Activa 6G price in India (2026) — all variants, state-wise",c:"price-guide"},
+  {t:"💰 Yamaha R15 V4 price in India (2026) — complete price list by state",c:"price-guide"},
+  {t:"💰 Bajaj Pulsar 150 price in India (2026) — all variants, state-wise",c:"price-guide"},
+  {t:"💰 Hero Splendor Plus price in India (2026) — complete price list",c:"price-guide"},
+  {t:"💰 TVS Apache RTR 200 4V price in India (2026) — on-road by city",c:"price-guide"},
+  {t:"💰 Royal Enfield Himalayan 450 price in India (2026) — variant-wise",c:"price-guide"},
+  {t:"💰 Ather 450X price in India (2026) — variant-wise, city-wise",c:"price-guide"},
+  {t:"💰 Ola S1 Pro price in India (2026) — all variants with final on-road cost",c:"price-guide"},
+  {t:"💰 Bajaj Dominar 400 price in India (2026) — complete price list",c:"price-guide"},
+  {t:"💰 cheapest bikes in India (2026) — under Rs 60,000, honestly ranked",c:"price-guide"},
+  {t:"💰 Royal Enfield Hunter 350 price in India (2026) — all variants by city",c:"price-guide"},
+  {t:"💰 KTM Adventure 390 price in India (2026) — state-wise on-road breakdown",c:"price-guide"},
+  // GUIDE
+  {t:"📋 how to buy a used bike in India (2026) — what to actually check",c:"guide"},
+  {t:"📋 how to read a bike spec sheet — what numbers actually matter",c:"guide"},
+  {t:"📋 ABS vs non-ABS — is it worth paying extra in India?",c:"guide"},
+  {t:"📋 bike insurance guide India (2026) — what you're actually paying for",c:"guide"},
+  {t:"📋 how to maintain your bike in India — the honest schedule",c:"guide"},
+  {t:"📋 best helmets under Rs 3000 in India (2026) — safety you can afford",c:"guide"},
+  {t:"📋 BS6 Phase 2 explained — what changed and should you care?",c:"guide"},
+  {t:"📋 how to calculate real-world mileage (not ARAI mileage)",c:"guide"},
+  {t:"📋 best riding gear under Rs 5000 in India (2026)",c:"guide"},
+  {t:"📋 commuter vs sports vs cruiser — which category is right for you?",c:"guide"},
+  {t:"📋 why bikes are cheaper in some states — India's road tax explained",c:"guide"},
+  {t:"📋 bike loan guide India (2026) — EMI, interest rates, what to know before signing",c:"guide"},
+  {t:"📋 most common bike maintenance mistakes Indians make",c:"guide"},
+  {t:"📋 10 most googled bike questions in India — answered honestly",c:"guide"},
+  {t:"📋 how to negotiate at a bike showroom in India (2026 edition)",c:"guide"},
+  {t:"📋 OBD2 on bikes — what it means and why it affects your servicing costs",c:"guide"},
+];
+
+document.getElementById('tc').textContent = guides.length;
+
+let cat = 'all', q = '';
+
+function render(){
+  let f = cat==='all' ? [...guides] : guides.filter(g=>g.c===cat);
+  if(q) f = f.filter(g=>g.t.toLowerCase().includes(q.toLowerCase()));
+  const list = document.getElementById('glist');
+  const empty = document.getElementById('empty');
+  list.innerHTML = '';
+  empty.style.display = f.length ? 'none' : 'block';
+  f.forEach(g=>{
+    const el = document.createElement('div');
+    el.className = 'gr';
+    el.innerHTML = `<span class="gr-title">${g.t}</span><span class="gr-tag">${g.c}</span>`;
+    list.appendChild(el);
+  });
+}
+
+// Bottom filter tabs
+document.querySelectorAll('.ftabs-ag .ft').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.ftabs-ag .ft').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  cat = b.dataset.cat;
+  render();
+}));
+
+// Top filter tabs (scroll to all guides and filter)
+document.querySelectorAll('.ftabs-top .ft').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.ftabs-top .ft').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  cat = b.dataset.top;
+  // sync bottom tabs
+  document.querySelectorAll('.ftabs-ag .ft').forEach(x=>{
+    x.classList.toggle('on', x.dataset.cat===cat);
+  });
+  render();
+  if(b.dataset.top!=='all'){
+    setTimeout(()=>document.getElementById('all').scrollIntoView({behavior:'smooth'}),100);
+  }
+}));
+
+document.getElementById('srch').addEventListener('input',e=>{q=e.target.value;render();});
+
+render();
+</script>
+</body>
+</html>
