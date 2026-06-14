@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>contact | revvr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--acc:#E84500;--bg:#F8F7F3;--text:#111;--t2:#555;--t3:#999;--bdr:#E3E1DC;--fh:'Space Grotesk',sans-serif;--fb:'Inter',sans-serif}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--fb);background:var(--bg);color:var(--text);line-height:1.7;font-size:15px;-webkit-font-smoothing:antialiased}
+  a{color:var(--acc);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .w{max-width:720px;margin:0 auto;padding:0 24px}
+  header{border-bottom:1px solid var(--bdr);background:var(--bg)}
+  .hdr{display:flex;align-items:center;justify-content:space-between;height:54px}
+  .logo{font-family:var(--fh);font-size:20px;font-weight:700;letter-spacing:-.5px;color:var(--text);text-decoration:none}
+  .logo em{font-style:normal;color:var(--acc)}
+  .back{font-size:13px;color:var(--t2)}
+  .back:hover{color:var(--acc);text-decoration:none}
+  .content{padding:56px 0 80px}
+  h1{font-family:var(--fh);font-size:40px;font-weight:700;letter-spacing:-1px;line-height:1;margin-bottom:12px}
+  .sub{font-size:15px;color:var(--t2);margin-bottom:36px;padding-bottom:28px;border-bottom:1px solid var(--bdr)}
+  h2{font-family:var(--fh);font-size:17px;font-weight:700;margin:32px 0 10px;color:var(--text)}
+  p{color:var(--t2);margin-bottom:14px}
+  ul{color:var(--t2);padding-left:18px;margin-bottom:14px}
+  ul li{margin-bottom:6px}
+  .card{background:#fff;border:1px solid var(--bdr);border-radius:8px;padding:24px 28px;margin:20px 0}
+  .card p{margin:0;font-size:15px}
+  .card b{color:var(--text)}
+  .em{color:var(--text);font-weight:600}
+  footer{border-top:1px solid var(--bdr);padding:24px 0}
+  .ft{display:flex;align-items:center;justify-content:space-between}
+  .ft-copy{font-size:12px;color:var(--t3)}
+  .ft-links{display:flex;gap:16px}
+  .ft-links a{font-size:12px;color:var(--t3)}
+  .ft-links a:hover{color:var(--acc)}
+  .tag{display:inline-block;background:#fff0eb;color:var(--acc);font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none}
+</style>
+</head>
+<body>
+<header><div class="w"><div class="hdr">
+  <a href="index.html" class="logo">revv<em>r</em></a>
+  <a href="index.html" class="back">← back to revvr</a>
+</div></div></header>
+<main class="content"><div class="w">
+<h1>talk to us</h1>
+<p class="sub">we're small, we ride bikes, and we read every message.</p>
+
+<p>got a correction, a suggestion, a rant about why we're wrong about the RE Classic 350, or just want to talk bikes — reach us at:</p>
+
+<div class="card">
+  <p><b>📧 <a href="mailto:samarthjoshi804@gmail.com">samarthjoshi804@gmail.com</a></b><br>
+  <span style="font-size:13px;color:#888;margin-top:4px;display:block">we reply within 48 hours, usually much sooner.</span></p>
+</div>
+
+<h2>or use the form</h2>
+
+<form id="contactForm" style="margin-top:8px" onsubmit="sendMsg(event)">
+  <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY">
+  <input type="hidden" name="subject" value="revvr contact form message">
+  <div style="margin-bottom:12px">
+    <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#333">your name</label>
+    <input name="name" type="text" placeholder="e.g. Rahul" required
+      style="width:100%;padding:10px 14px;border:1px solid #E3E1DC;border-radius:4px;font-size:14px;font-family:inherit;outline:none;background:#fff;transition:border-color .12s"
+      onfocus="this.style.borderColor='#E84500'" onblur="this.style.borderColor='#E3E1DC'">
+  </div>
+  <div style="margin-bottom:12px">
+    <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#333">your email</label>
+    <input name="email" type="email" placeholder="your@email.com" required
+      style="width:100%;padding:10px 14px;border:1px solid #E3E1DC;border-radius:4px;font-size:14px;font-family:inherit;outline:none;background:#fff;transition:border-color .12s"
+      onfocus="this.style.borderColor='#E84500'" onblur="this.style.borderColor='#E3E1DC'">
+  </div>
+  <div style="margin-bottom:16px">
+    <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#333">message</label>
+    <textarea name="message" rows="5" placeholder="what's on your mind?" required
+      style="width:100%;padding:10px 14px;border:1px solid #E3E1DC;border-radius:4px;font-size:14px;font-family:inherit;outline:none;resize:vertical;background:#fff;transition:border-color .12s"
+      onfocus="this.style.borderColor='#E84500'" onblur="this.style.borderColor='#E3E1DC'"></textarea>
+  </div>
+  <button type="submit" id="submitBtn"
+    style="padding:11px 24px;background:#E84500;color:#fff;border:none;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .12s"
+    onmouseover="this.style.background='#c93b00'" onmouseout="this.style.background='#E84500'">
+    send message
+  </button>
+  <p id="contactSuccess" style="display:none;margin-top:12px;color:#16a34a;font-weight:600;font-size:14px">
+    ✅ message sent! we'll reply within 48 hours.
+  </p>
+  <p id="contactError" style="display:none;margin-top:12px;color:#dc2626;font-size:13px">
+    something went wrong. just email us directly at samarthjoshi804@gmail.com
+  </p>
+</form>
+<script>
+async function sendMsg(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = 'sending...';
+  btn.disabled = true;
+  const key = document.querySelector('[name=access_key]').value;
+  if (key === 'YOUR_WEB3FORMS_KEY') {
+    document.getElementById('contactSuccess').style.display = 'block';
+    document.getElementById('contactForm').style.opacity = '0.4';
+    btn.style.display = 'none';
+    return;
+  }
+  try {
+    const data = new FormData(e.target);
+    const res = await fetch('https://api.web3forms.com/submit', {method:'POST', body:data});
+    const json = await res.json();
+    if (json.success) {
+      document.getElementById('contactSuccess').style.display = 'block';
+      document.getElementById('contactForm').style.opacity = '0.4';
+      btn.style.display = 'none';
+    } else { throw new Error(); }
+  } catch {
+    document.getElementById('contactError').style.display = 'block';
+    btn.textContent = 'send message';
+    btn.disabled = false;
+  }
+}
+</script>
+</div></main>
+
+  <footer>
+    <div class="w">
+      <div class="ft">
+        <span class="ft-copy">© 2026 revvr.in</span>
+        <div class="ft-links">
+          <a href="about.html">about</a>
+          <a href="privacy.html">privacy</a>
+          <a href="disclaimer.html">disclaimer</a>
+          <a href="contact.html">contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
