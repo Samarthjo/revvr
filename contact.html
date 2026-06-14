@@ -57,7 +57,7 @@
 <h2>or use the form</h2>
 
 <form id="contactForm" style="margin-top:8px" onsubmit="sendMsg(event)">
-  <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY">
+  <input type="hidden" name="access_key" value="d05a620d-b181-4012-a74c-b06bb76df5bf">
   <input type="hidden" name="subject" value="revvr contact form message">
   <div style="margin-bottom:12px">
     <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#333">your name</label>
@@ -96,7 +96,7 @@ async function sendMsg(e) {
   btn.textContent = 'sending...';
   btn.disabled = true;
   const key = document.querySelector('[name=access_key]').value;
-  if (key === 'YOUR_WEB3FORMS_KEY') {
+  if (key === 'd05a620d-b181-4012-a74c-b06bb76df5bf') {
     document.getElementById('contactSuccess').style.display = 'block';
     document.getElementById('contactForm').style.opacity = '0.4';
     btn.style.display = 'none';
