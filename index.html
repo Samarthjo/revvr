@@ -331,7 +331,7 @@ footer{border-top:1px solid var(--bdr);padding:48px 0 32px;margin-top:64px}
       <p class="budget-sub">what to buy at every budget in india</p>
       <p>best bike at Rs 60K / 80K / 1L / 1.5L / 2L / 3L+ — across commuter, sports, adventure, scooter, and electric. updated prices by city. free, one email.</p>
       <form id="budgetForm" onsubmit="submitEmail(event)">
-        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY">
+        <input type="hidden" name="access_key" value="d05a620d-b181-4012-a74c-b06bb76df5bf">
         <input type="hidden" name="subject" value="New revvr subscriber - free cheat sheet">
         <div class="erow">
           <input class="ei" id="budgetEmail" type="email" name="email" placeholder="your@email.com" required>
@@ -653,7 +653,7 @@ async function submitEmail(e){
   const btn = document.getElementById('budgetBtn');
   const key = document.querySelector('#budgetForm [name=access_key]').value;
   btn.textContent='sending...'; btn.disabled=true;
-  if(key==='YOUR_WEB3FORMS_KEY'){
+  if(key==='d05a620d-b181-4012-a74c-b06bb76df5bf'){
     document.getElementById('budgetSuccess').style.display='block';
     document.getElementById('budgetForm').style.display='none';
     return;
