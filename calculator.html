@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>bike EMI calculator india (2026) | revvr</title>
+<meta name="description" content="Free bike EMI calculator for India. Calculate monthly EMI, on-road price by state, and total cost of ownership for any Indian bike or scooter.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F8F7F3;--white:#fff;--tag:#EDECE8;--text:#111;--t2:#555;--t3:#999;--acc:#E84500;--acc-bg:#FFF1EB;--bdr:#E3E1DC;--fh:'Space Grotesk',sans-serif;--fb:'Inter',sans-serif;--r:8px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--bg);color:var(--text);line-height:1.6;font-size:15px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.w{max-width:900px;margin:0 auto;padding:0 24px}
+header{border-bottom:1px solid var(--bdr);background:rgba(248,247,243,.94);backdrop-filter:blur(12px);position:sticky;top:0;z-index:9}
+.hdr{display:flex;align-items:center;justify-content:space-between;height:54px}
+.logo{font-family:var(--fh);font-size:20px;font-weight:700;letter-spacing:-.5px}
+.logo em{font-style:normal;color:var(--acc)}
+.back{font-size:13px;color:var(--t2);transition:color .12s}
+.back:hover{color:var(--acc)}
+
+.hero{padding:48px 0 40px;border-bottom:1px solid var(--bdr)}
+.hero h1{font-family:var(--fh);font-size:clamp(32px,6vw,52px);font-weight:700;letter-spacing:-1.5px;line-height:1;margin-bottom:10px}
+.hero h1 em{font-style:normal;color:var(--acc)}
+.hero p{font-size:15px;color:var(--t2);max-width:480px}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:40px 0}
+.card{background:var(--white);border:1px solid var(--bdr);border-radius:var(--r);padding:28px}
+.card h2{font-family:var(--fh);font-size:17px;font-weight:700;margin-bottom:20px;letter-spacing:-.3px}
+
+label{display:block;font-size:12px;font-weight:600;color:var(--t2);margin-bottom:6px;letter-spacing:.04em;text-transform:uppercase}
+input[type=number],select{width:100%;padding:10px 14px;border:1px solid var(--bdr);border-radius:4px;font-size:14px;font-family:var(--fb);color:var(--text);background:var(--bg);outline:none;transition:border-color .12s;appearance:none;-webkit-appearance:none}
+input[type=number]:focus,select:focus{border-color:var(--acc)}
+.field{margin-bottom:16px}
+.prefix{position:relative}
+.prefix span{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--t3);pointer-events:none}
+.prefix input{padding-left:28px}
+
+.rate-btns{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.rb{padding:7px 14px;border:1px solid var(--bdr);border-radius:100px;font-size:12px;font-weight:600;cursor:pointer;background:transparent;font-family:var(--fb);color:var(--t2);transition:all .12s}
+.rb:hover{border-color:var(--acc);color:var(--acc)}
+.rb.on{background:var(--acc);border-color:var(--acc);color:#fff}
+
+.calc-btn{width:100%;padding:12px;background:var(--acc);color:#fff;border:none;border-radius:4px;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--fh);margin-top:8px;letter-spacing:-.3px;transition:background .12s}
+.calc-btn:hover{background:#c93b00}
+
+/* RESULTS */
+.results{background:var(--white);border:1px solid var(--bdr);border-radius:var(--r);padding:28px}
+.results h2{font-family:var(--fh);font-size:17px;font-weight:700;margin-bottom:20px;letter-spacing:-.3px}
+.emi-big{text-align:center;padding:24px;background:var(--acc-bg);border-radius:var(--r);margin-bottom:20px;border:1px solid #f5c9b5}
+.emi-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--acc);margin-bottom:4px}
+.emi-amount{font-family:var(--fh);font-size:clamp(36px,7vw,52px);font-weight:700;color:var(--acc);letter-spacing:-1px}
+.emi-sub{font-size:12px;color:var(--t2);margin-top:4px}
+
+.breakdown{display:flex;flex-direction:column;gap:0}
+.brow{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--bdr)}
+.brow:last-child{border-bottom:none;font-weight:700;padding-top:14px;font-size:15px}
+.brow-label{font-size:13px;color:var(--t2)}
+.brow-val{font-size:13px;font-weight:600;color:var(--text);text-align:right}
+.brow:last-child .brow-label,.brow:last-child .brow-val{color:var(--text)}
+
+.section-divider{border:none;border-top:1px solid var(--bdr);margin:24px 0}
+.note{font-size:11px;color:var(--t3);margin-top:16px;line-height:1.5}
+
+.placeholder{text-align:center;padding:40px 20px;color:var(--t3)}
+.placeholder-ic{font-size:40px;margin-bottom:12px}
+.placeholder p{font-size:13px}
+
+.popular-bikes{margin-bottom:16px}
+.pb-label{font-size:12px;font-weight:600;color:var(--t2);margin-bottom:8px;letter-spacing:.04em;text-transform:uppercase}
+.pb-chips{display:flex;gap:6px;flex-wrap:wrap}
+.pb-chip{padding:5px 12px;background:var(--tag);border-radius:100px;font-size:12px;font-weight:500;cursor:pointer;transition:all .12s;border:1px solid transparent;color:var(--text)}
+.pb-chip:hover{background:var(--acc-bg);border-color:var(--acc);color:var(--acc)}
+
+footer{border-top:1px solid var(--bdr);padding:24px 0;margin-top:0}
+.ft{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.ft-copy{font-size:12px;color:var(--t3)}
+.ft-links{display:flex;gap:16px}
+.ft-links a{font-size:12px;color:var(--t3);transition:color .1s}
+.ft-links a:hover{color:var(--acc)}
+
+@media(max-width:720px){
+  .grid{grid-template-columns:1fr}
+  .results{margin-top:0}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="w">
+    <div class="hdr">
+      <a href="index.html" class="logo">revv<em>r</em></a>
+      <a href="index.html" class="back">← back to revvr</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="w">
+    <h1>bike <em>EMI</em> calculator</h1>
+    <p>monthly EMI, on-road price by state, total cost of ownership — for any Indian bike or scooter in 2026.</p>
+  </div>
+</section>
+
+<div class="w">
+  <div class="grid">
+
+    <!-- INPUT PANEL -->
+    <div>
+      <div class="card">
+        <h2>bike details</h2>
+
+        <div class="popular-bikes">
+          <div class="pb-label">quick pick</div>
+          <div class="pb-chips">
+            <span class="pb-chip" data-price="149900">RE Classic 350</span>
+            <span class="pb-chip" data-price="215000">RE Himalayan 450</span>
+            <span class="pb-chip" data-price="310000">KTM Duke 390</span>
+            <span class="pb-chip" data-price="181490">Yamaha R15 V4</span>
+            <span class="pb-chip" data-price="76000">Hero Splendor+</span>
+            <span class="pb-chip" data-price="80000">Honda Activa 6G</span>
+            <span class="pb-chip" data-price="154990">Ather 450X</span>
+            <span class="pb-chip" data-price="149999">Ola S1 Pro</span>
+            <span class="pb-chip" data-price="118090">TVS Apache 200</span>
+            <span class="pb-chip" data-price="125000">Bajaj Pulsar NS200</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>ex-showroom price (₹)</label>
+          <div class="prefix">
+            <span>₹</span>
+            <input type="number" id="price" placeholder="e.g. 215000" min="30000" max="5000000">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>state (for road tax)</label>
+          <select id="state">
+            <option value="10">select your state</option>
+            <option value="13">Karnataka — 13%</option>
+            <option value="10">Maharashtra — 10%</option>
+            <option value="10">Delhi — 10%</option>
+            <option value="10">Tamil Nadu — 10%</option>
+            <option value="9">Telangana — 9%</option>
+            <option value="6">Gujarat — 6%</option>
+            <option value="10">Rajasthan — 10%</option>
+            <option value="8">Uttar Pradesh — 8%</option>
+            <option value="8">Madhya Pradesh — 8%</option>
+            <option value="6">Himachal Pradesh — 6%</option>
+            <option value="10">West Bengal — 10%</option>
+            <option value="9">Kerala — 9%</option>
+            <option value="8">Punjab — 8%</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>down payment (₹)</label>
+          <div class="prefix">
+            <span>₹</span>
+            <input type="number" id="downpay" placeholder="e.g. 50000" min="0">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>loan tenure</label>
+          <select id="tenure">
+            <option value="12">12 months (1 year)</option>
+            <option value="24">24 months (2 years)</option>
+            <option value="36" selected>36 months (3 years)</option>
+            <option value="48">48 months (4 years)</option>
+            <option value="60">60 months (5 years)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>interest rate</label>
+          <div class="rate-btns">
+            <button class="rb" onclick="setRate(9.5,this)">Bank — 9.5%</button>
+            <button class="rb on" onclick="setRate(12,this)">Dealer — 12%</button>
+            <button class="rb" onclick="setRate(14,this)">NBFC — 14%</button>
+            <button class="rb" id="customRateBtn" onclick="setRate(null,this)">custom</button>
+          </div>
+          <div class="prefix" id="customRateField" style="display:none">
+            <input type="number" id="customRate" placeholder="e.g. 11.5" min="5" max="30" step="0.5">
+          </div>
+        </div>
+
+        <button class="calc-btn" onclick="calculate()">calculate →</button>
+      </div>
+    </div>
+
+    <!-- RESULTS PANEL -->
+    <div class="results" id="resultsPanel">
+      <div class="placeholder" id="placeholder">
+        <div class="placeholder-ic">🧮</div>
+        <p>fill in the details and hit calculate</p>
+      </div>
+      <div id="resultsContent" style="display:none">
+        <h2>your numbers</h2>
+        <div class="emi-big">
+          <div class="emi-label">monthly EMI</div>
+          <div class="emi-amount" id="emiDisplay">₹0</div>
+          <div class="emi-sub" id="emiSub"></div>
+        </div>
+
+        <div class="breakdown" id="emiBreakdown"></div>
+
+        <hr class="section-divider">
+
+        <div style="font-family:var(--fh);font-size:15px;font-weight:700;margin-bottom:14px">on-road price breakdown</div>
+        <div class="breakdown" id="onroadBreakdown"></div>
+
+        <p class="note">* Road tax rates are approximate and vary by vehicle age, CC, and state regulations. Insurance is estimated at 2% of ex-showroom. Always verify final on-road price with your showroom before buying.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="w">
+    <div class="ft">
+      <span class="ft-copy">© 2026 revvr.in</span>
+      <div class="ft-links">
+        <a href="index.html">home</a>
+        <a href="about.html">about</a>
+        <a href="contact.html">contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+let activeRate = 12;
+
+function setRate(val, btn){
+  document.querySelectorAll('.rb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  const cf = document.getElementById('customRateField');
+  if(val===null){ cf.style.display='block'; activeRate=null; }
+  else { cf.style.display='none'; activeRate=val; }
+}
+
+document.querySelectorAll('.pb-chip').forEach(chip=>{
+  chip.addEventListener('click',function(){
+    document.querySelectorAll('.pb-chip').forEach(c=>c.classList.remove('on'));
+    this.classList.add('on');
+    document.getElementById('price').value = this.dataset.price;
+    const p = parseInt(this.dataset.price);
+    document.getElementById('downpay').value = Math.round(p*0.2/1000)*1000;
+  });
+});
+
+function fmt(n){ return '₹'+Math.round(n).toLocaleString('en-IN'); }
+
+function calculate(){
+  const price = parseFloat(document.getElementById('price').value)||0;
+  if(!price){ alert('please enter a bike price'); return; }
+  const stateTax = parseFloat(document.getElementById('state').value)||10;
+  const down = parseFloat(document.getElementById('downpay').value)||0;
+  const n = parseInt(document.getElementById('tenure').value);
+  const r = activeRate!==null ? activeRate : (parseFloat(document.getElementById('customRate').value)||12);
+
+  // On-road calculation
+  const roadTax = price * stateTax/100;
+  const insurance = price * 0.02;
+  const registration = 2500;
+  const handling = 2000;
+  const onRoad = price + roadTax + insurance + registration + handling;
+
+  // EMI calculation
+  const principal = Math.max(0, onRoad - down);
+  const monthlyRate = r/100/12;
+  let emi = 0;
+  if(principal <= 0){ emi = 0; }
+  else if(monthlyRate === 0){ emi = principal/n; }
+  else { emi = principal * monthlyRate * Math.pow(1+monthlyRate,n) / (Math.pow(1+monthlyRate,n)-1); }
+
+  const totalPaid = emi*n + down;
+  const totalInterest = totalPaid - onRoad;
+
+  // Show results
+  document.getElementById('placeholder').style.display='none';
+  document.getElementById('resultsContent').style.display='block';
+  document.getElementById('emiDisplay').textContent = fmt(emi);
+  document.getElementById('emiSub').textContent = 'for '+n+' months at '+r+'% p.a.';
+
+  document.getElementById('emiBreakdown').innerHTML = [
+    ['down payment',fmt(down)],
+    ['loan amount',fmt(principal)],
+    ['interest paid',fmt(totalInterest)],
+    ['total amount paid',fmt(totalPaid)],
+  ].map(([l,v])=>`<div class="brow"><span class="brow-label">${l}</span><span class="brow-val">${v}</span></div>`).join('');
+
+  document.getElementById('onroadBreakdown').innerHTML = [
+    ['ex-showroom price',fmt(price)],
+    ['road tax ('+stateTax+'%)',fmt(roadTax)],
+    ['insurance (est.)',fmt(insurance)],
+    ['registration',fmt(registration)],
+    ['handling charges',fmt(handling)],
+    ['on-road price (est.)',fmt(onRoad)],
+  ].map(([l,v])=>`<div class="brow"><span class="brow-label">${l}</span><span class="brow-val">${v}</span></div>`).join('');
+}
+
+document.addEventListener('keydown',e=>{ if(e.key==='Enter') calculate(); });
+</script>
+</body>
+</html>
